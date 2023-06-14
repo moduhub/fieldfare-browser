@@ -13,7 +13,7 @@ import {
 import { BrowserCryptoManager } from './BrowserCryptoManager.js';
 import { IndexedDBChunkManager } from './IndexedDBChunkManager.js';
 import { IndexedDBNVD } from './IndexedDBNVD.js';
-import { WebClientTransceiver } from '../shared/WebClientTransceiver.js';
+import { WebClientTransceiver } from './WebClientTransceiver.js';
 
 function setupBasicCollectionTypes() {
     Collection.registerType('list', ChunkList);
