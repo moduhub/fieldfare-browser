@@ -1,0 +1,8 @@
+node_modules
+
+.yalc
+yalc.lock
+
+# fieldfare cli data #
+chunks
+nvs

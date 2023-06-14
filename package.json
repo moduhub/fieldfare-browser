@@ -1,0 +1,31 @@
+{
+  "name": "@fieldfare/browser",
+  "version": "1.0.0",
+  "description": "Initialization code to run the Fieldfare framework on the browser.",
+  "main": "./src/index.js",
+  "exports": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "yalc retreat --all",
+    "postpack": "yalc restore --all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moduhub/fieldfare-browser.git"
+  },
+  "keywords": [
+    "fieldfare",
+    "browser",
+    "manager",
+    "library"
+  ],
+  "author": "Adan Kvitschal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moduhub/fieldfare-browser/issues"
+  },
+  "homepage": "https://github.com/moduhub/fieldfare-browser#readme",
+  "dependencies": {
+    "@fieldfare/core": "file:.yalc/@fieldfare/core"
+  }
+}
