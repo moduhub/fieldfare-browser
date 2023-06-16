@@ -15,6 +15,13 @@ import { IndexedDBChunkManager } from './IndexedDBChunkManager.js';
 import { IndexedDBNVD } from './IndexedDBNVD.js';
 import { WebClientTransceiver } from './WebClientTransceiver.js';
 
+export {
+	IndexedDBChunkManager,
+	IndexedDBNVD,
+	WebClientTransceiver,
+	BrowserCryptoManager,
+};
+
 function setupBasicCollectionTypes() {
     Collection.registerType('list', ChunkList);
     Collection.registerType('set', ChunkSet);
