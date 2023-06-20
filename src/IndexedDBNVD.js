@@ -5,15 +5,13 @@
  * ISC LICENSE
  */
 
-import {NVD} from '@fieldfare/core';
+import {NVD, logger} from '@fieldfare/core';
 import {IndexedDBBase} from './IndexedDBBase.js';
 
 export class IndexedDBNVD {
 
     constructor() {
-
          this.db = new IndexedDBBase('nvdata');
-
     }
 
     static init() {
@@ -21,18 +19,17 @@ export class IndexedDBNVD {
     }
 
     async save(key, object) {
-
-        console.log("Attemping to save object " + JSON.stringify(object) + " at key " + key);
-
+        logger.debug('IndexedDB NVD saving key: ' + key + ' object: ' + JSON.stringify(object));
         await this.db.put(key, object);
-
     }
 
     async load(key) {
-
-        var object = await this.db.get(key);
-
-        return object;
+        try {
+            const object = await this.db.get(key);
+            return object;
+        } catch (error) {
+            return undefined;
+        }
     }
 
 };
