@@ -24,6 +24,7 @@ export class WebClientTransceiver extends Transceiver {
 						throw Error('Attempt to send data to WebSocket that is not open');
 					}
 					var stringifiedMessage = JSON.stringify(message, message.jsonReplacer);
+					logger.debug('[WS-TRX] Transmit ' + stringifiedMessage.length + 'B SRV:' + message.service?.substring(0,8) + ' DST:' + message.destination?.substring(2, 10) + '..');
 					socket.send(stringifiedMessage);
 				},
 				active: () => {
@@ -40,10 +41,9 @@ export class WebClientTransceiver extends Transceiver {
 			socket.addEventListener('message', (event) => {
 				var message = event.data;
 				if(rNewChannel.onMessageReceived) {
-					//logger.log('info', 'WS: Message from server: ' + message);
 					try {
-						//Convert to object
 						var messageObject = JSON.parse(message);
+						logger.debug('[WS-TRX] Receive  ' + message.length + 'B SRV:' + messageObject.service?.substring(0,8) + ' SRC:' + messageObject.source?.substring(2, 10) + '..');
 						rNewChannel.onMessageReceived(messageObject);
 					} catch (error) {
 						logger.log('info', "Failed to parse message: " + error);
@@ -57,8 +57,11 @@ export class WebClientTransceiver extends Transceiver {
 				logger.log('info', 'WebSocket client opened: ' + JSON.stringify(event));
 				resolve(rNewChannel);
 			});
+			socket.addEventListener('close', event => {
+				logger.log('info', 'WebSocket client closed: code=' + event.code + ', reason=' + event.reason);
+			});
 			socket.addEventListener('error', (event) => {
-				logger.debug('WebSocket client error!');
+				logger.error('WebSocket client error!');
 				reject(JSON.stringify(event));
 			});
 		});
